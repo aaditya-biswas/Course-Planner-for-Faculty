@@ -1,0 +1,18 @@
+{
+  "name": "se_project",
+  "version": "1.0.0",
+  "description": "\"Course Planner for Faculty\"",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js"
+  ],
+  "author": "Hema Chauhan",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^34.1.1"
+  }
+}
