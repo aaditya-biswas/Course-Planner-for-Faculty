@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Scheduler</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f8ff; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .container { display: flex; width: 80%; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); }
-        .left-panel { flex: 1; padding: 20px; background: #ffebcd; border-radius: 10px; animation: 21; ; }
+        body { font-family: Arial, sans-serif; background-color:rgb(0, 136, 255);  align-items: center; height: 100vh; }
+        .container { display: flex; width: 80%; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); margin-top: 10px}
+        .left-panel { flex: 1; padding: 20px; background: #ffebcd; border-radius: 10px; animation: 21;  }
         .right-panel { flex: 2; padding: 20px; background: #e6e6fa; border-radius: 10px; }
+        .rightmost-panel { flex: 2; p   adding: 20px; background:rgb(239, 239, 25); border-radius: 10px; text-align: center; }
+        .Table {background-color:  #e6e6fa; margin: 20px; width: 80%; height:80%}
         h2, h3 { text-align: center; }
         input, select, button { width: 100%; padding: 10px; margin: 5px 0; border-radius: 5px; border: none; }
         button { background-color: #4caf50; color: white; cursor: pointer; transition: transform 0.2s; }
@@ -36,10 +38,11 @@
     </style>
 </head>
 <body>
-<nav>
-<div class="container">
-   
-        <>
+<div name = "navbar" style="background-color:white; height: 5%; width: 100%; border-style = rounded; border-radius: 20px ;">
+   <p style = "padding-top:10px;si"> Home </p>
+</div>
+<div class="container" display = "flex" justify-content = "center">
+    
         <div class="left-panel">
             <h2>Course Scheduler</h2>
             <label>Date: <input type="date" id="courseDate"></label>
@@ -52,6 +55,7 @@
         </div>
         
         <div class="right-panel">
+
             <h3>Calendar</h3>
             <label>Select Month:</label>
             <select id="monthSelect" onchange="updateCalendar()">
@@ -69,8 +73,21 @@
                 <option value="11">December</option>
             </select>
             <div id="calendar"></div>
+            
+
+
         </div>
+        <div class = "rightmost-panel" >
+             <h1> Registered Courses List </h1>
+            <div class = "Table">
+                <ul id = "List">
+                </ul>
+            </div>
+        </div>
+    
+
     </div>
+
 
     <script>
         let courses = [];
@@ -124,6 +141,18 @@
                 calendar.appendChild(dayBox);
             }
         }
+        function get_courses() {
+            let myvar = <?= json_encode($_SESSION["Courses"], JSON_UNESCAPED_UNICODE); ?>;
+            let x =document.getElementById("List");
+            let my_arr = myvar.split(",");
+            for(var i = 0; i < Object.keys(my_arr).length; i++) {
+                let item = document.createElement("li");
+                item.appendChild(document.createTextNode(Object.values(my_arr)[i]));
+                x.appendChild(item);
+            };
+        }
+        get_courses();
+
 
         updateCalendar();
     </script>
