@@ -100,8 +100,9 @@
 
     <script>
         let courses = [];
+        var days = <?= json_encode($_SESSION["Days"], JSON_UNESCAPED_UNICODE); ?>;
         const week_day =  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        var myvar = <?= json_encode($_SESSION["Courses"], JSON_UNESCAPED_UNICODE); ?>.split(',');
+        var myvar = <?= json_encode($_SESSION["Courses"], JSON_UNESCAPED_UNICODE); ?>;
         function addCourse() {
             let date = document.getElementById("courseDate").value;
             let name = document.getElementById("courseName").value;
@@ -150,7 +151,18 @@
                 if (courses.some(course => course.date === dateString)) {
                     dayBox.classList.add("highlight");
                 }
+                if (days.find(element => element == we_day)) {
+                    dayBox.classList.add("highlight");
+                }
                 calendar.appendChild(dayBox);
+            }
+        }
+        function display() {
+            if (days.find(element => element == "Tuesday")){
+                alert(`${days[1]} `);
+            }
+            else {
+                alert(`${days[0]}`);
             }
         }
         function get_courses() {
@@ -186,7 +198,7 @@
 
     // Add event listeners to the delete buttons
         get_courses();
-
+        display();
 
         updateCalendar();
     </script>
