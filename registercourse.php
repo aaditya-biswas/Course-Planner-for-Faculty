@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,9 +111,19 @@
 
     <script>
         let courses = [];
-        var days = <?= json_encode($_SESSION["Days"], JSON_UNESCAPED_UNICODE); ?>;
+        var days = <?= json_encode(
+            $_SESSION["Days"],
+            JSON_UNESCAPED_UNICODE
+        ) ?>;
         const week_day =  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        var myvar = <?= json_encode($_SESSION["Courses"], JSON_UNESCAPED_UNICODE); ?>;
+// <<<<<<< //Testing1
+//         var myvar = <?= json_encode(
+//             $_SESSION["Courses"],
+//             JSON_UNESCAPED_UNICODE
+//         ) ?>;
+// =======
+//         var myvar = <?= json_encode($_SESSION["Courses"], JSON_UNESCAPED_UNICODE); ?>;
+// >>>>>>> main
         const date = new Date();
 
         function addCourse() {
