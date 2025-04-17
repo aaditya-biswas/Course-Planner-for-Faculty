@@ -41,9 +41,11 @@
     </style>
 </head>
 <body>
-<div name = "navbar" style="background-color:white; height: 5%; width: 100%; border-style = rounded; border-radius: 20px ;">
-   <p style = "padding-top:10px;si"> Home </p>
-</div>
+<div id="navbar" style="background-color: white; height: 50px; display: flex; align-items: center; padding: 0 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+      <a href="#" style="margin-right: 20px; text-decoration: none; color: black;">Courses</a>
+      <a href="#" style="margin-right: 20px; text-decoration: none; color: black;">TA</a>
+      <a href="#" style="text-decoration: none; color: black;">Exam</a>
+    </div>
 <div class="container" display = "flex" justify-content = "center">
     
         <div class="left-panel">
@@ -151,19 +153,14 @@
                 if (courses.some(course => course.date === dateString)) {
                     dayBox.classList.add("highlight");
                 }
-                if (days.find(element => element == we_day)) {
+                if (days.includes(we_day)) {
                     dayBox.classList.add("highlight");
                 }
                 calendar.appendChild(dayBox);
             }
         }
         function display() {
-            if (days.find(element => element == "Tuesday")){
-                alert(`${days[1]} `);
-            }
-            else {
-                alert(`${days[0]}`);
-            }
+            alert("das");
         }
         function get_courses() {
             
@@ -175,32 +172,30 @@
                 let iconHtml = `${Object.values(myvar)[i]} <i class="${icons}" onclick="removeListItem(${i})"></i>`;
                 item.innerHTML = iconHtml;
                 x.appendChild(item);
-            };
-            
-            
-        }
-    function removeListItem(item) {
-        myvar.splice(item,1);
-        let trashIcons = document.getElementsByClassName("fas fa-trash");
-        if (trashIcons[item]) {
-            let listItem = trashIcons[item].closest("li"); // Get the parent <li> element
-            if (listItem) {
-                listItem.parentNode.removeChild(listItem); // Remove the <li> element
             }
-        }
-        document.getElementById("List").innerHTML= ``;
-        get_courses();
-        return false;
-
-
+            
         
-    }
+        }
 
+        function removeListItem(item) {
+            myvar.splice(item,1);
+            let trashIcons = document.getElementsByClassName("fas fa-trash");
+            if (trashIcons[item]) {
+                let listItem = trashIcons[item].closest("li"); // Get the parent <li> element
+                if (listItem) {
+                    listItem.parentNode.removeChild(listItem); // Remove the <li> element
+                }
+            }
+            document.getElementById("List").innerHTML= ``;
+            get_courses();
+            return false;
+        }
+        
     // Add event listeners to the delete buttons
-        get_courses();
-        display();
-
-        updateCalendar();
+    // display();    
+    get_courses();
+        
+    updateCalendar();
     </script>
 </body>
 </html>
