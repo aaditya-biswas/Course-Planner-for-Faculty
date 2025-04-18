@@ -1,48 +1,44 @@
 body {
-    margin: 0px;
-    background-color: orange;
-
+  margin: 0px;
+  background-color: orange;
 }
 table {
-    margin-left: 10%;
-    border: dashed;
+  margin-left: 10%;
+  border: dashed;
 }
 #C1 {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 h1 {
-    color : green;
-    background-color: yellow;
-    text-align: center;
-    
-    
-    
-    width: 100%;
-    margin-top:0px;
-    margin-bottom: 0px;
+  color: green;
+  background-color: yellow;
+  text-align: center;
+
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 h2 {
-    text-align: center;
-    padding: 10px;
-    background-color: blue;
-    color: white;
-    margin :0px;
+  text-align: center;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  margin: 0px;
 }
 hr {
-    margin-top: 5%;
+  margin-top: 5%;
 }
 h3 {
-    margin-top :5%;
-    text-align:  center;
+  margin-top: 5%;
+  text-align: center;
 }
-#Div1{
-    border-style: solid;
-    border-color:green;
-    margin-left: 25%;
-    margin-right: 25%;
+#Div1 {
+  border-style: solid;
+  border-color: green;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 form {
-    background-color: orange;
-    text-align: center;
-
+  background-color: orange;
+  text-align: center;
 }
