@@ -116,14 +116,6 @@
             JSON_UNESCAPED_UNICODE
         ) ?>;
         const week_day =  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-// <<<<<<< //Testing1
-//         var myvar = <?= json_encode(
-//             $_SESSION["Courses"],
-//             JSON_UNESCAPED_UNICODE
-//         ) ?>;
-// =======
-//         var myvar = <?= json_encode($_SESSION["Courses"], JSON_UNESCAPED_UNICODE); ?>;
-// >>>>>>> main
         const date = new Date();
 
         function addCourse() {
