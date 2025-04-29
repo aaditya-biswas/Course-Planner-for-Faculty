@@ -64,7 +64,7 @@ Date: January 29, 2025
 1. Web-based:
    The project can be accessed at https://course-planner.great-site.net/
 
-##OR
+## OR
 1. Clone repository
    ```bash
    git clone https://github.com/your-username/course-planner.git
