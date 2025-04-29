@@ -1,4 +1,15 @@
 <?php session_start(); ?>
+<?php
+// Check if an error message is present in the query parameters
+if (isset($_GET['error'])) {
+    // Decode the error message
+    $errorMessage = urldecode($_GET['error']);
+    echo "<script type='text/javascript'>  
+        alert('".addslashes($errorMessage)."');
+    </script>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +106,7 @@
         </div>
         <div class = "add-course" >
             <h1> Add Courses </h1>
-            <form id = "myForm" method="post" action = "http://localhost/Add_Course.php">
+            <form id = "myForm" method="post" action = "http://localhost//Course-Planner-for-Faculty//Add_Course.php" >
                 <br/><br/><br/>
             <label for="AddCourse" style = "text-decoration: bold; color:aquawhite;">Enter Course Name:</label>
             <input type="text" name="AddCourse"  style="width :40%;"><br/><br/><br/>
@@ -115,6 +126,10 @@
             $_SESSION["Days"],
             JSON_UNESCAPED_UNICODE
         ) ?>;
+        var myvar = <?= json_encode(
+            $_SESSION["Courses"],
+            JSON_UNESCAPED_UNICODE
+        ) ?>; 
         const week_day =  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const date = new Date();
 
@@ -197,7 +212,6 @@
                 item.innerHTML = iconHtml;
                 x.appendChild(item);
             }
-            
         
         }
 
