@@ -17,6 +17,8 @@ if (isset($_GET['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Scheduler</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel = "stylesheet" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body { font-family: Arial, sans-serif; background-color:rgb(0, 136, 255);justify-content:space-evenly; height: 100vh; }
         .container { display: flex; justify-content: flex-start; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); margin-top: 10px}
@@ -33,13 +35,21 @@ if (isset($_GET['error'])) {
         .day { border: 1px solid #000; padding: 10px; min-height: 50px; background-color: #fff; cursor: pointer; text-align: center; transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
         .day:hover { background-color: #d3d3d3; box-shadow: 0px 0px 10px rgba(0, 0, 255, 0.5); }
         .highlight { background-color: lightgreen; font-weight: bold; animation: fadeIn 0.5s ease-in-out, glow 1s infinite alternate; text-decoration-thickness: 10px;}
-        
+        #remove {margin-top: auto;}
         ul { list-style: none; padding: 0; }
         .Submit:hover {transform: scale(1.05);}
         li { background: #ffcccb; margin: 7px; padding: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; animation: fadeIn 0.5s ease-in-out; }
         .remove-btn { background-color: red; color: white; border: none; padding: 2px; cursor: pointer; border-radius: 5px; transition: transform 0.2s; width:25%; height: 10px;}
         .remove-btn:hover { background-color: darkred; transform: scale(1.1); }
         i {padding: 5px;background-color: red;color:white}
+        .color0 {background-color: tan;}
+        .color1 {background-color: aqua;}
+        .color2 {background-color: lawngreen;}
+        .color3 {background-color: violet;}
+        .dicolor0 {color: tan;}
+        .dicolor1 {color : aqua}
+        .dicolor2 {color: lawngreen}
+        .dicolor3 {color: violet;}
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
@@ -56,7 +66,7 @@ if (isset($_GET['error'])) {
 </head>
 <body>
 <div id="navbar" style="background-color: white; height: 50px; display: flex; align-items: center; padding: 0 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-      <a href="#" style="margin-right: 20px; text-decoration: none; color: black;">Courses</a>
+      <a href="https://docs.google.com/spreadsheets/d/1TRwJQ8fTEPdVTX2cQMHsaPJkPz8wFeKLtb-myc2lqi0/edit?gid=946608464#gid=946608464" style="margin-right: 20px; text-decoration: none; color: black;">Courses</a>
       <a href="#" style="margin-right: 20px; text-decoration: none; color: black;">TA</a>
       <a href="#" style="text-decoration: none; color: black;">Exam</a>
     </div>
@@ -103,6 +113,11 @@ if (isset($_GET['error'])) {
                 <ul id = "List" >
                 </ul>
             </div>
+            <form id = "remove" name = "remove" method = "post" action = "http://localhost//Course-Planner-for-Faculty//Delete_Course.php">
+                <label for="RemoveCourse" style = "text-decoration: bold; color:aquawhite;">Delete Course</label>
+                <input type="text" name="RemoveCourse" id = "r_course" style="width :40%;">
+                <input class = "Submit" id = "submit" type="submit"   style="width :40%;">
+            </form>
         </div>
         <div class = "add-course" >
             <h1> Add Courses </h1>
@@ -111,6 +126,7 @@ if (isset($_GET['error'])) {
             <label for="AddCourse" style = "text-decoration: bold; color:aquawhite;">Enter Course Name:</label>
             <input type="text" name="AddCourse"  style="width :40%;"><br/><br/><br/>
             <input class = "Submit" id = "submit" type="submit"   style="width :20%;" >
+            <button type="submit" style="display:none;">Submit</button>
 
 
             </form>
@@ -160,11 +176,23 @@ if (isset($_GET['error'])) {
             list.innerHTML = "";
             courses.forEach((course, index) => {
                 let item = document.createElement("li");
-                item.innerHTML = `${course.date}: ${course.name} - ${course.desc} <button class='remove-btn' onclick="removeCourse(${index})">Remove</button>`;
+                item.innerHTML = `${course.date}: ${course.name} - ${course.desc} <button class='remove-btn' onclick=" removeCourse(${index});">Remove</button>`;
                 list.appendChild(item);
             });
         }
-
+        
+        function highlight_course_days(days_list , day,dayBox) {
+            for (let index = 0; index < days_list.length; index++) {
+                let element = days_list[index];
+                if (element.includes(day)){
+                    dayBox.classList.add("highlight")
+                    let rep = document.createElement("span");  
+                    rep.className = `dicolor${index}`;
+                    rep.innerHTML = "&diams;";
+                    dayBox.appendChild(rep);     
+                }
+            }
+        }
         function updateCalendar() {
             let calendar = document.getElementById("calendar");
             calendar.innerHTML = "";
@@ -181,7 +209,7 @@ if (isset($_GET['error'])) {
                 let we_day = week_day[(weekday+i-1)%7];
                 let dateString = `2025-${monthString}-${dayString}`;
                 
-                dayBox.textContent = `${i} \n ${we_day}`;
+                dayBox.textContent = `${i} \n ${we_day}\n`;
                 if (i == date.getDate()) {
                 
                     dayBox.style.textDecoration = "underline";
@@ -190,9 +218,11 @@ if (isset($_GET['error'])) {
                 if (courses.some(course => course.date === dateString)) {
                     dayBox.classList.add("highlight");
                 }
-                if (days.includes(we_day)) {
-                    dayBox.classList.add("highlight");
-                }
+                highlight_course_days(days,we_day,dayBox);
+                // if (days.includes(we_day)) {
+                //     dayBox.classList.add("highlight");
+                //     dayBox.classList.add(``)
+                // }
                 calendar.appendChild(dayBox);
             }
         }
@@ -204,29 +234,17 @@ if (isset($_GET['error'])) {
 
 
             let x =document.getElementById("List");
-            
             for(let i = 0; i < Object.keys(myvar).length; i++) {
                 let item = document.createElement("li");
+                
+                item.classList.add(`color${(i)%4}`);
                 let icons = 'fas fa-trash';
-                let iconHtml = `${Object.values(myvar)[i]} <i class="${icons} Submit" onclick="removeListItem(${i})"></i>`;
+                
+                let iconHtml = `${Object.values(myvar)[i]}`;
                 item.innerHTML = iconHtml;
                 x.appendChild(item);
             }
         
-        }
-
-        function removeListItem(item) {
-            myvar.splice(item,1);
-            let trashIcons = document.getElementsByClassName("fas fa-trash");
-            if (trashIcons[item]) {
-                let listItem = trashIcons[item].closest("li"); // Get the parent <li> element
-                if (listItem) {
-                    listItem.parentNode.removeChild(listItem); // Remove the <li> element
-                }
-            }
-            document.getElementById("List").innerHTML= ``;
-            get_courses();
-            return false;
         }
         
     // Add event listeners to the delete buttons
