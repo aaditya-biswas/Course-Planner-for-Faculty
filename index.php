@@ -5,7 +5,7 @@
   alert('Invalid Credentials'); 
   
   </script>" ;
-          
+  unset($_SESSION["Error"]);
   }?>
 <html>
   <head>
@@ -25,7 +25,7 @@
     <h3> Enter your ID and Password </h3>
     </section>
     <div id = "Div1">
-      <form id = "myForm" method="post" action = "http://localhost/Form.php">
+      <form id = "myForm" method="post" action = "https://localhost//Course-Planner-for-Faculty//Form.php">
         <br/><br/><br/>
           <label for="name">Username:</label>
           <input type="text" name="name" id="uniqueID"><br/><br/><br/>

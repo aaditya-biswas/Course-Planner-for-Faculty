@@ -27,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $stmt2->bind_param("s",$name);
     $stmt2->execute();
 
-    $courses = $stmt2->get_result()->fetch_assoc()["Course Code"];
+    $courses = trim($stmt2->get_result()->fetch_assoc()["Course Code"]);
     $_SESSION["Days"] = [];
-    $_SESSION["Courses"] = explode(",",$courses);
+    $_SESSION["Courses"] = explode(", ",$courses);
     for ($i=0; $i <sizeof($_SESSION["Courses"]) ; $i++) { 
     }
     for ($i=0; $i <sizeof($_SESSION["Courses"]) ; $i++) { 
@@ -51,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       // ;
       // ob_start(); // Start output buffering
       
-      // header("Location: https://localhost/registercourse.php");
+      header("Location: https://localhost//Course-Planner-for-Faculty//registercourse.php");
       
       exit(); // Stop further execution
     }
    else {
       $_SESSION['Error'] = "You left one or more of the required fields.";
-      
-      // header("Location: https://localhost/index.php");
+
+      header("Location:  https://localhost//Course-Planner-for-Faculty//index.php");
 
     }
     $conn->close();
