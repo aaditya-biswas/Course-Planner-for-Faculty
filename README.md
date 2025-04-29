@@ -61,4 +61,39 @@ Date: January 29, 2025
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/course-planner.git 
+   git clone https://github.com/your-username/course-planner.git
+2. Install dependencies:
+
+MySQL and PHP (via XAMPP)
+
+Node.js and Electron
+
+
+
+3. Set up the MySQL database using the provided schema.
+
+
+4. Launch the app using Electron:
+
+npm start
+
+
+
+Usage
+
+Log in with your faculty credentials
+
+Add or drop courses as needed
+
+Use the “Get Available” feature to check your free time
+
+Export your schedule as PDF
+
+
+Screenshots
+
+(Include screenshots of key features like the timetable interface, login page, etc.)
+
+Contributing
+
+Contributions are welcome! Please fork the repository and open a pull request with your proposed changes.
