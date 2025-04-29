@@ -2,6 +2,7 @@
 
 A digital platform designed to help faculty members efficiently plan, manage, and organize their academic schedules. This system provides user-friendly tools for syllabus management, lesson planning, timetable generation, and more.
 
+
 ## Table of Contents
 
 - [About the Project](#about-the-project)
@@ -16,7 +17,8 @@ A digital platform designed to help faculty members efficiently plan, manage, an
 
 ## About the Project
 
-The Course Planner for Faculty is a structured scheduling platform tailored for academic institutions. It empowers faculty members to:
+The Course Planner for Faculty is a structured scheduling platform tailored for academic institutions. It was conceptualized to be more effective as instead of using google cloud it automatically takes the input from the database.It empowers faculty members to:
+
 - Create and manage course schedules
 - Plan lessons and instructional strategies
 - Access weekly views of their teaching calendar
