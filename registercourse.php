@@ -113,7 +113,7 @@ if (isset($_GET['error'])) {
                 <ul id = "List" >
                 </ul>
             </div>
-            <form id = "remove" name = "remove" method = "post" action = "http://localhost//Course-Planner-for-Faculty//Delete_Course.php">
+            <form id = "remove" name = "remove" method = "post" action = "Delete_Course.php">
                 <label for="RemoveCourse" style = "text-decoration: bold; color:aquawhite;">Delete Course</label>
                 <input type="text" name="RemoveCourse" id = "r_course" style="width :40%;">
                 <input class = "Submit" id = "submit" type="submit"   style="width :40%;">
@@ -121,7 +121,7 @@ if (isset($_GET['error'])) {
         </div>
         <div class = "add-course" >
             <h1> Add Courses </h1>
-            <form id = "myForm" method="post" action = "http://localhost//Course-Planner-for-Faculty//Add_Course.php" >
+            <form id = "myForm" method="post" action = "Add_Course.php" >
                 <br/><br/><br/>
             <label for="AddCourse" style = "text-decoration: bold; color:aquawhite;">Enter Course Name:</label>
             <input type="text" name="AddCourse"  style="width :40%;"><br/><br/><br/>
