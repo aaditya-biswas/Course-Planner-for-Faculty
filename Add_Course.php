@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirect to the target page with the error message as a query parameter
         header(
-            "Location: https://localhost//Course-Planner-for-Faculty//registercourse.php?error=" .
+            "Location: registercourse.php?error=" .
                 $encodedMessage);
         exit();
     } else {
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         header(
-            "Location: https://localhost//Course-Planner-for-Faculty//registercourse.php"
+            "Location: registercourse.php"
         );
         $conn->close();
     }
