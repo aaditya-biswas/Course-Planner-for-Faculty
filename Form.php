@@ -1,10 +1,10 @@
 <?php
 session_start();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$servername = "sql210.infinityfree.com";
-$username = "if0_38767307";
-$password = "Aaditya678";
-$database = "if0_38767307_se_project";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "se_project";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $conn = mysqli_connect($servername, $username, $password, $database);
@@ -44,8 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
 
     if ($result->num_rows > 0) {
-      // ;
-      // ob_start(); // Start output buffering
+
       
       header("Location: registercourse.php");
       

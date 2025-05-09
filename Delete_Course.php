@@ -7,7 +7,6 @@ $password = "";
 $database = "se_project";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $course = trim($_POST["RemoveCourse"]);
-    echo $_SESSION["Courses"][0];
     
     if (!(in_array($course, $_SESSION["Courses"]))) {
         // Define the error message
@@ -19,15 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirect to the target page with the error message as a query parameter
         header(
-            "Location: https://localhost//Course-Planner-for-Faculty//registercourse.php?error=" .
+            "Location: registercourse.php?error=" .
                 $encodedMessage);
         exit();
     } 
     
     else {
             $conn = mysqli_connect($servername, $username, $password, $database);
-            array_splice($_SESSION["Courses"],array_search($course,$_SESSION["Courses"]),1);
-            array_splice($_SESSION["Days"],array_search($course,$_SESSION["Courses"]),1);
+            $off = array_search($course,$_SESSION["Courses"]);
+            array_splice($_SESSION["Days"],$off,1);
+            array_splice($_SESSION["Courses"],  $off,1);
             $str1 = implode(", ",$_SESSION["Courses"]);
             $stmt5 = $conn->prepare(
                 "UPDATE `user_course` SET `Course Code` = ? WHERE Username = ?"
@@ -36,9 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt5->execute();
             $conn->commit();
         }
-        header(
-            "Location: registercourse.php"
-        );
+        header("Location: registercourse.php");
         $conn->close();
     }
 ?>
