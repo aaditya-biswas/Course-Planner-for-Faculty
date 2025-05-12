@@ -254,7 +254,7 @@ if (isset($_GET['error'])) {
 
     <script>
         // Storing the events in an array
-
+        
         let events = [];
         
         // Storing the Days data for each Course
@@ -276,10 +276,12 @@ if (isset($_GET['error'])) {
         
         ) ?>;
         // List of weekdays zero indexed 
-        
+
         const week_day =  ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         
         const date = new Date();
+
+        document.getElementById("monthSelect").value = date.getMonth();
         
         // Function to add events with error handling
 
@@ -355,7 +357,7 @@ if (isset($_GET['error'])) {
         function updateCalendar() {
             let calendar = document.getElementById("calendar");
             calendar.innerHTML = "";
-            let selectedMonth = parseInt(date.getMonth());
+            let selectedMonth = parseInt(document.getElementById("monthSelect").value);
 
             
             let daysInMonth = new Date(2025, selectedMonth + 1, 0).getDate();
@@ -375,7 +377,7 @@ if (isset($_GET['error'])) {
                 let dateString = `2025-${monthString}-${dayString}`;
                 
                 dayBox.textContent = `${i} \n ${we_day}\n`;
-                if (i == date.getDate()) {  // Underlining today's date
+                if (i == date.getDate() && selectedMonth == date.getMonth()) {  // Underlining today's date
                 
                     dayBox.style.textDecoration = "underline";
                     dayBox.style.textDecorationColor = "blue";
