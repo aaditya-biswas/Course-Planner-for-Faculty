@@ -133,7 +133,7 @@ if (isset($_GET['error'])) {
 
     <!-- Creating the navigation bar with respctive fields -->
 
-    <div id="navbar" style="background-color: white; height: 50px; display: flex; align-items: center; padding: 0 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+    <div id="navbar" style="background-color: white; height: 50px; display: flex; align-items: center ;border-radius: 10px ; padding: 0 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
       
     <a href="https://docs.google.com/spreadsheets/d/1TRwJQ8fTEPdVTX2cQMHsaPJkPz8wFeKLtb-myc2lqi0/edit?gid=946608464#gid=946608464" style="margin-right: 20px; text-decoration: none; color: black;">Courses</a>
 
@@ -355,7 +355,7 @@ if (isset($_GET['error'])) {
         function updateCalendar() {
             let calendar = document.getElementById("calendar");
             calendar.innerHTML = "";
-            let selectedMonth = parseInt(document.getElementById("monthSelect").value);
+            let selectedMonth = parseInt(date.getMonth());
 
             
             let daysInMonth = new Date(2025, selectedMonth + 1, 0).getDate();
