@@ -6,7 +6,7 @@ $username = "root";
 $password = "";
 $database = "se_project";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $course = trim($_POST["AddCourse"]);
+    $course = trim(htmlspecialchars($_POST["AddCourse"]));
 
     if (in_array($course, $_SESSION["Courses"])) {
         // Define the error message
@@ -52,12 +52,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt5->bind_param("ss", $add_course, $_SESSION["name"]);
                 $stmt5->execute();
                 $conn->commit();
-            }
+                $stmt6 = $conn->prepare("SELECT `Day` FROM `slot_day` WHERE `slot_day`.`Day_ID` IN (SELECT `slot_time`.`Day_ID` FROM `slot_time` WHERE `slot_time`.`Slot_ID` = (SELECT `SLOT` FROM `courses` WHERE `courses`.`Course Code` = ?))");
+                $stmt6->bind_param("s",$course);
+                $stmt6->execute();
+                $result_stmt6 = $stmt6->get_result();
+                $_SESSION["Days"][]=array_column($result_stmt6->fetch_all(),0);
+            }   
             $_SESSION["Added"] = $course;
         } else {
             $_SESSION["Added"] = 0;
         }
-
+        var_dump($_SESSION["Days"]);
         header(
             "Location: registercourse.php"
         );
