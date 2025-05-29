@@ -13,15 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $name = $_POST["name"] ?? '';
-    $password = $_POST["Password"] ?? '';
+    $name = htmlspecialchars($_POST["name"] ?? '');
+    $password = htmlspecialchars($_POST["Password"] ?? '');
 
     $stmt = $conn->prepare("SELECT * FROM users WHERE Username= ? AND Password = ?");
     $stmt->bind_param("ss", $name,   $password);
     $stmt->execute();
     $result = $stmt->get_result();
-    $_SESSION["name"] = $_POST["name"];
-    $_SESSION["Password"] = $_POST["Password"];
+    $_SESSION["name"] = $name;
+    $_SESSION["Password"] = $password;
     
     $stmt2 = $conn->prepare("SELECT * FROM user_course WHERE Username= ?");
     $stmt2->bind_param("s",$name);
